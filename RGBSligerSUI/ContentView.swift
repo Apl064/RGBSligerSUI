@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var isPresented = false
     
-    @State private var sliderValue = Double.random(in: 0...255)
+    @State private var sliderValue =  randomSliderValue()//Double.random(in: 0...255)
     
     @State private var tempText = "333"
     
@@ -25,21 +25,21 @@ struct ContentView: View {
                         blue: sliderValue)
                 
                 VStack(spacing: 10) {
-                    CustomSliderView(value: $sliderValue,
-                                     valueText: $sliderValue, color: .red)
-//                    HStack(spacing: 8) {
-//                        Text("R: \(lround(sliderValue))")
-//                            .frame(width: 55, height: 30, alignment: .leading)
-//                        Text("0")
-//                            .foregroundColor(.red)
-//                        Slider(value: $sliderValue, in: 0...255, step: 1)
-//                            .tint(.red)
-//                        Text("255")
-//                            .foregroundColor(.red)
-//                        TextField("", text: $tempText)
-//                            .frame(width: 35, height: 30, alignment: .center)
-//                            .border(.black, width: 1)
-//                    }.padding(.horizontal, 8)
+//                    CustomSliderView(value: $sliderValue,
+//                                     valueText: $sliderValue, color: .red)
+                    HStack(spacing: 8) {
+                        Text("R: \(lround(sliderValue))")
+                            .frame(width: 55, height: 30, alignment: .leading)
+                        Text("0")
+                            .foregroundColor(.red)
+                        Slider(value: $sliderValue, in: 0...255, step: 1)
+                            .tint(.red)
+                        Text("255")
+                            .foregroundColor(.red)
+                        TextField(valueTextField: $tempText)
+                            .frame(width: 35, height: 30, alignment: .center)
+                            .border(.black, width: 1)
+                    }.padding(.horizontal, 8)
                     
                     HStack(spacing: 8) {
                         Text("G: \(lround(sliderValue))")
@@ -50,7 +50,7 @@ struct ContentView: View {
                             .tint(.green)
                         Text("255")
                             .foregroundColor(.green)
-                        TextField("", text: $tempText)
+                        TextField(valueTextField: $tempText)
                             .frame(width: 35, height: 30, alignment: .center)
                             .border(.black, width: 1)
                     }.padding(.horizontal, 8)
@@ -64,7 +64,7 @@ struct ContentView: View {
                             .tint(.blue)
                         Text("255")
                             .foregroundColor(.blue)
-                        TextField("", text: $tempText)
+                        TextField(valueTextField: $tempText)
                             .frame(width: 35, height: 30, alignment: .center)
                             .border(.black, width: 1).tint(.red)
                     }.padding(.horizontal, 8)
@@ -81,6 +81,10 @@ private var backgroudColor: some View {
                            blue: 229/255,
                            alpha: 1))
         .ignoresSafeArea()
+}
+
+private func randomSliderValue() -> Double {
+    Double.random(in: 0...255)
 }
 
 struct ContentView_Previews: PreviewProvider {
